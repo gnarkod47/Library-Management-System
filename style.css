@@ -1,0 +1,11 @@
+#side_bar{
+    position: relative;
+    background-color:rgb(14, 119, 151);
+    top: 70px;
+    padding: 50px;
+    width: 350px;
+    height: 403px;
+    border-radius: 2%;
+    color: white;
+}
+

@@ -65,7 +65,7 @@
       if(isset($_POST['login'])){
         $connection = mysqli_connect("localhost","root","appu1234");
         $db = mysqli_select_db($connection,"lms");
-        $query = "select * from users where email = '$_POST[email]'";
+        $query = "select * from admin where email = '$_POST[email]'";
         $query_run = mysqli_query($connection,$query);
         while($row = mysqli_fetch_assoc($query_run)){
           if($row['email']==$_POST['email']){
@@ -73,7 +73,7 @@
               $_SESSION['name'] = $row['name'];
               $_SESSION['email'] = $row['email'];
               $_SESSION['id'] =  $row['id'];
-              header("Location:user_dashboard.php");
+              header("Location:admin_dashboard.php");
             }
             else{
               ?>

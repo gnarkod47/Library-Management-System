@@ -80,7 +80,7 @@ if (!isset($_SESSION['name'])) {
           </ul>
         </li>        
         <li class="nav-item">
-          <a class="nav-link" href="#">Issue Book</a>
+          <a class="nav-link" href="issue_book.php">Issue Book</a>
         </li>
       </ul>      
     </div>
@@ -91,18 +91,26 @@ if (!isset($_SESSION['name'])) {
   <div class="col-md-4"></div>
     <div class="col-md-4">
       <form action="" method="post">
-        <div class="mb-3 form-group">
-          <label for="author_id" class="form-label">Author ID</label>
-          <input type="number" name="author_id" class="form-control" required>
-        </div>
-        <div class="mb-3 form-group">
+      <div class="mb-3 form-group">
           <label for="author_name" class="form-label">Author Name</label>
           <input type="text" name="author_name" class="form-control" required>
         </div>
-        <button type="submit" class="btn btn-primary">Add Author</button>
+        <button type="submit" name="add_author" class="btn btn-primary">Add Author</button>
       </form> 
     </div>
   <div class="col-md-4"></div>
 </div>
 </body>
 </html>
+
+<?php
+if(isset($_POST['add_author'])){
+  $connection = mysqli_connect("localhost","root","appu1234");
+  $db = mysqli_select_db($connection,"lms");
+  $query = "insert into authors (author_name) values('$_POST[author_name]')";
+  $query_run = mysqli_query($connection,$query);
+  ?>
+  <script>alert("Author added")</script>
+  <?php
+}
+?>

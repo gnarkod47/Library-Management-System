@@ -92,17 +92,25 @@ if (!isset($_SESSION['name'])) {
     <div class="col-md-4">
       <form action="" method="post">
         <div class="mb-3 form-group">
-          <label for="cat_id" class="form-label">Category ID</label>
-          <input type="number" name="cat_id" class="form-control" required>
-        </div>
-        <div class="mb-3 form-group">
           <label for="cat_name" class="form-label">Category Name</label>
           <input type="text" name="cat_name" class="form-control" required>
         </div>
-        <button type="submit" class="btn btn-primary">Add category</button>
+        <button type="submit" name="add_category" class="btn btn-primary">Add category</button>
       </form> 
     </div>
   <div class="col-md-4"></div>
 </div>
 </body>
 </html>
+
+<?php
+if(isset($_POST['add_category'])){
+  $connection = mysqli_connect("localhost","root","appu1234");
+  $db = mysqli_select_db($connection,"lms");
+  $query = "insert into category (cat_name) values('$_POST[cat_name]')";
+  $query_run = mysqli_query($connection,$query);
+  ?>
+  <script>alert("Category added")</script>
+  <?php
+}
+?>

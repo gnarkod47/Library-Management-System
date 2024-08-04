@@ -91,43 +91,68 @@ if (!isset($_SESSION['name'])) {
   <div class="col-md-4"></div>
     <div class="col-md-4">
       <form action="" method="post">
-        <!-- <div class="mb-3 form-group">
-          <label for="book_id" class="form-label">Book ID</label>
-          <input type="number" name="book_id" class="form-control" required>
-        </div> -->
         <div class="mb-3 form-group">
           <label for="book_name" class="form-label">Book Name</label>
           <input type="text" name="book_name" class="form-control" required>
         </div>
         <div class="mb-3 form-group">
-          <label for="book_name" class="form-label">Author ID</label>
-          <input type="number" name="author_id" class="form-control" required>
+          <label for="book_author" class="form-label">Book Author</label>
+          <select name="book_author" class="form-control">
+            <option>*Select author*</option>
+            <?php
+            $connection = mysqli_connect("localhost","root","appu1234");
+            $db = mysqli_select_db($connection,"lms");
+            $query = "select author_name from authors;";
+            $query_run = mysqli_query($connection,$query);
+            while($row = mysqli_fetch_assoc($query_run)){
+              ?>
+              <option><?php echo $row['author_name'];?></option>
+              <?php
+            }
+            ?>
+          </select>
         </div>
         <div class="mb-3 form-group">
-          <label for="category_id" class="form-label">Category ID</label>
-          <input type="number" name="category_id" class="form-control" required>
+          <label for="book_number" class="form-label">Book Number</label>
+          <input type="text" name="book_number" class="form-control" required>
         </div>
         <div class="mb-3 form-group">
-          <label for="book_no" class="form-label">Book no</label>
-          <input type="number" name ="book_no" class="form-control" required>
+          <label for="student_id" class="form-label">Student ID</label>
+          <select name="student_id" class="form-control">
+            <option value="">*Select ID*</option>
+            <?php
+            $connection = mysqli_connect("localhost","root","appu1234");
+            $db = mysqli_select_db($connection,"lms");
+            $query = "select id from users;";
+            $query_run = mysqli_query($connection,$query);
+            while($row = mysqli_fetch_assoc($query_run)){
+              ?>
+              <option><?php echo $row['id'];?></option>
+              <?php
+            }
+            ?>
+          </select>
         </div>
         <div class="mb-3 form-group">
-          <label for="book_price" class="form-label">Book Price</label>
-          <input type="number" name ="book_price" class="form-control" required>
+          <label for="issue_date" class="form-label">Issue Date</label>
+          <input type="text" name="issue_date" class="form-control" required value=<?php echo date("d-m-Y")?>>
         </div>
-        <button type="submit" name="add_book" class="btn btn-primary">Add book</button>
+        <button type="submit" name="issue_book" class="btn btn-primary">Issue Book</button>
       </form> 
     </div>
   <div class="col-md-4"></div>
 </div>
 </body>
 </html>
-<?php 
-if(isset($_POST['add_book'])){
+
+<?php
+if(isset($_POST['issue_book'])){
   $connection = mysqli_connect("localhost","root","appu1234");
   $db = mysqli_select_db($connection,"lms");
-  $query = "insert into book (book_name,author_id,category_id,book_no,book_price) values('$_POST[book_name]',$_POST[author_id],$_POST[category_id],$_POST[book_no],$_POST[book_price])";
+  $query = "insert into issued_books (book_no,book_name,book_author,student_id,issue_date) values($_POST[book_number],'$_POST[book_name]','$_POST[book_author]',$_POST[student_id],'$_POST[issue_date]')";
   $query_run = mysqli_query($connection,$query);
+  ?>
+  <script>alert("Book issued!")</script>
+  <?php
 }
 ?>
-      

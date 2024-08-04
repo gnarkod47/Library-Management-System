@@ -80,7 +80,7 @@ if (!isset($_SESSION['name'])) {
           </ul>
         </li>        
         <li class="nav-item">
-          <a class="nav-link" href="#">Issue Book</a>
+          <a class="nav-link" href="issue_book.php">Issue Book</a>
         </li>
       </ul>      
     </div>

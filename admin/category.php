@@ -54,7 +54,6 @@ $query = "select cat_id,cat_name from category";
 <div class="row" style=" padding:100px">
   <div class="col-md-2"></div>
   <div class="col-md-8">
-    <form action="">
       <table class="table-bordered" width="900px" style="text-align:center">
         <tr>
           <th>Category ID</th>
@@ -74,7 +73,8 @@ $query = "select cat_id,cat_name from category";
         }
         ?>
       </table>
-    </form>
+      <br>
+      <p class="text-center"><a class=" btn btn-primary" href="admin_dashboard.php" role="button">Go to DashBoard</a></p>
   </div>
   <div class="col-md-2"></div>
 </div>

@@ -1,5 +1,4 @@
 <?php
-require("functions.php");
 session_start();
 if (!isset($_SESSION['name'])) {
   header("Location:index.php");
@@ -88,29 +87,39 @@ if (!isset($_SESSION['name'])) {
 </nav>
 <br><span><marquee behavior="" direction="">Library opens at 9:00 AM and closes when the last worm leaves!!!</marquee></span>
 <div class="row">
-  <div class="col-md-4"></div>
-    <div class="col-md-4">
-      <form action="" method="post">
-      <div class="mb-3 form-group">
-          <label for="author_name" class="form-label">Author Name</label>
-          <input type="text" name="author_name" class="form-control" required>
-        </div>
-        <button type="submit" name="add_author" class="btn btn-primary">Add Author</button>
-      </form> 
+  <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Category ID</th>
+            <th scope="col">Category Name</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        <?php 
+          $connection = mysqli_connect("localhost","root","appu1234");
+          $db = mysqli_select_db($connection,"lms");
+          $query = "select cat_name, cat_id from category";
+          $query_run = mysqli_query($connection,$query);
+          while($row = mysqli_fetch_assoc($query_run)){
+            ?>
+            <tr>
+              <td><?php echo $row['cat_id']?></td>
+              <td><?php echo $row['cat_name']?></td>
+              <td>
+              <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:white;" href="edit_category.php?categ=<?php echo $row['cat_id'];?>">Edit</a></button>
+              <button type="button" class="btn btn-danger"><a style="text-decoration: none; color:white;" href="delete_category.php?categ=<?php echo $row['cat_id'];?>">Delete</a></button>
+              </td>
+            </tr>
+            <?php
+          }
+        ?>
+        </tbody>
+      </table>
     </div>
-  <div class="col-md-4"></div>
+  <div class="col-md-2"></div>
 </div>
 </body>
 </html>
-
-<?php
-if(isset($_POST['add_author'])){
-  $connection = mysqli_connect("localhost","root","appu1234");
-  $db = mysqli_select_db($connection,"lms");
-  $query = "insert into authors (author_name) values('$_POST[author_name]')";
-  $query_run = mysqli_query($connection,$query);
-  ?>
-  <script>alert("Author added")</script>
-  <?php
-}
-?>

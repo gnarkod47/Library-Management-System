@@ -16,14 +16,14 @@
         </div>    
         <ul class="nav navbar-nav navbar-right">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="admin/index.php">Admin Login</a>
+          <a class="nav-link active" aria-current="page" href="index.php">Admin Login</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="../index.php">User Login</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="signup.php">Register</a>
-        </li>        
+        </li>         -->
       </ul>
     </div>
   </div>

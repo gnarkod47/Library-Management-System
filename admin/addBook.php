@@ -58,7 +58,7 @@ if (!isset($_SESSION['name'])) {
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="addBook.php">Add New Book</a></li>
-            <li><a class="dropdown-item" href="#">Manage Books</a></li>
+            <li><a class="dropdown-item" href="manage_book.php">Manage Books</a></li>
           </ul>
         </li>        
         <li class="nav-item dropdown">
@@ -67,7 +67,7 @@ if (!isset($_SESSION['name'])) {
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="addCategory.php">New category</a></li>
-            <li><a class="dropdown-item" href="#">Manage category</a></li> 
+            <li><a class="dropdown-item" href="manage_category.php">Manage category</a></li> 
           </ul>
         </li>        
         <li class="nav-item dropdown">
@@ -76,11 +76,11 @@ if (!isset($_SESSION['name'])) {
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="addAuthor.php">Add new author</a></li>
-            <li><a class="dropdown-item" href="#">Manage Author</a></li>
+            <li><a class="dropdown-item" href="manage_author.php">Manage Author</a></li>
           </ul>
         </li>        
         <li class="nav-item">
-          <a class="nav-link" href="#">Issue Book</a>
+          <a class="nav-link" href="issue_book.php">Issue Book</a>
         </li>
       </ul>      
     </div>
@@ -91,10 +91,6 @@ if (!isset($_SESSION['name'])) {
   <div class="col-md-4"></div>
     <div class="col-md-4">
       <form action="" method="post">
-        <!-- <div class="mb-3 form-group">
-          <label for="book_id" class="form-label">Book ID</label>
-          <input type="number" name="book_id" class="form-control" required>
-        </div> -->
         <div class="mb-3 form-group">
           <label for="book_name" class="form-label">Book Name</label>
           <input type="text" name="book_name" class="form-control" required>

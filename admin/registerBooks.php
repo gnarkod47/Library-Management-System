@@ -57,7 +57,6 @@ $query = "select b.book_name,b.book_no,b.book_price,b.category_id,a.author_name 
 <div class="row" style=" padding:100px">
   <div class="col-md-2"></div>
   <div class="col-md-8">
-    <form action="">
       <table class="table-bordered" width="900px" style="text-align:center">
         <tr>
           <th>Book name</th>
@@ -86,7 +85,8 @@ $query = "select b.book_name,b.book_no,b.book_price,b.category_id,a.author_name 
         }
         ?>
       </table>
-    </form>
+      <br>
+      <p class="text-center"><a class=" btn btn-primary" href="admin_dashboard.php" role="button">Go to DashBoard</a></p>
   </div>
   <div class="col-md-2"></div>
 </div>

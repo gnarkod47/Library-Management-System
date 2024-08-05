@@ -5,6 +5,13 @@ if (!isset($_SESSION['name'])) {
   header("Location:index.php");
   exit();
 }
+$connection = mysqli_connect("localhost","root","appu1234");
+$db = mysqli_select_db($connection,"lms");
+$query = "select cat_name, cat_id from category where $_GET[categ]";
+$query_run = mysqli_query($connection,$query);
+while($row = mysqli_fetch_assoc($query_run)){
+  $category_name = $row["cat_name"];
+}
 ?>
 
 <!DOCTYPE html>
@@ -91,26 +98,25 @@ if (!isset($_SESSION['name'])) {
   <div class="col-md-4"></div>
     <div class="col-md-4">
       <form action="" method="post">
-      <div class="mb-3 form-group">
-          <label for="author_name" class="form-label">Author Name</label>
-          <input type="text" name="author_name" class="form-control" required>
+        <div class="mb-3 form-group">
+          <label for="cat_name" class="form-label">Category Name</label>
+          <input type="text" name="cat_name" class="form-control" required value="<?php echo $category_name?>">
         </div>
-        <button type="submit" name="add_author" class="btn btn-primary">Add Author</button>
+        <button type="submit" name="update_category" class="btn btn-primary">Update category</button>
       </form> 
     </div>
   <div class="col-md-4"></div>
 </div>
 </body>
 </html>
-
 <?php
-if(isset($_POST['add_author'])){
+if(isset($_POST['update_category'])){
   $connection = mysqli_connect("localhost","root","appu1234");
   $db = mysqli_select_db($connection,"lms");
-  $query = "insert into authors (author_name) values('$_POST[author_name]')";
+  $query = "update category set cat_name = '$_POST[cat_name]' where cat_id = $_GET[categ]";
   $query_run = mysqli_query($connection,$query);
   ?>
-  <script>alert("Author added")</script>
+  <script>location.replace("manage_category.php");</script>
   <?php
 }
 ?>

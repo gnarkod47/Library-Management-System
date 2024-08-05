@@ -45,9 +45,45 @@ if (!isset($_SESSION['name'])) {
 </nav>
 <br><span><marquee behavior="" direction="">Library opens at 9:00 AM and closes when the last worm leaves!!!</marquee></span>
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <h3 style="text-align:center">Issued books</h3>
+    <br>
+  <table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Book No</th>
+      <th scope="col">Book Name</th>
+      <th scope="col">Book Author</th>
+      <th scope="col">Issued date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+      $connection = mysqli_connect('localhost','root','appu1234');
+      $db = mysqli_select_db($connection,'lms');
+      $query = "select * from issued_books where student_id = $_SESSION[id]";
+      $query_run = mysqli_query($connection, $query);
+      while($row = mysqli_fetch_assoc($query_run)) {
+        $book_no = $row['book_no']; 
+        $book_name = $row['book_name']; 
+        $book_author = $row['book_author']; 
+        $issue_date = $row['issue_date']; 
+        ?>
+        <tr>
+          <td><?php echo $book_no ;?></td>
+          <td><?php echo $book_name ;?></td>
+          <td><?php echo $book_author ;?></td>
+          <td><?php echo $issue_date ;?></td>
+        </tr>
+        <?php
+      }
+    ?>
     
+  </tbody>
+  </table>
   </div>
+  <div class="col-md-2"></div>
 </div>
 </body>
 </html>

@@ -49,12 +49,10 @@ $query = "select author_id,author_name from authors";
     </div>
   </div>
 </nav>
-
 <br><span><marquee behavior="" direction="">Library opens at 9:00 AM and closes when the last worm leaves!!!</marquee></span>
 <div class="row" style=" padding:100px">
   <div class="col-md-2"></div>
   <div class="col-md-8">
-    <form action="">
       <table class="table-bordered" width="900px" style="text-align:center">
         <tr>
           <th>Author ID</th>
@@ -74,7 +72,8 @@ $query = "select author_id,author_name from authors";
         }
         ?>
       </table>
-    </form>
+      <br>
+      <p class="text-center"><a class=" btn btn-primary" href="admin_dashboard.php" role="button">Go to DashBoard</a></p>
   </div>
   <div class="col-md-2"></div>
 </div>

@@ -5,6 +5,13 @@ if (!isset($_SESSION['name'])) {
   header("Location:index.php");
   exit();
 }
+$connection = mysqli_connect("localhost","root","appu1234");
+$db = mysqli_select_db($connection,"lms");
+$query = "select * from authors where author_id = $_GET[auth] ";
+$query_run = mysqli_query($connection,$query);
+while($row = mysqli_fetch_assoc($query_run)){
+  $author_name = $row["author_name"];
+}
 ?>
 
 <!DOCTYPE html>
@@ -93,9 +100,9 @@ if (!isset($_SESSION['name'])) {
       <form action="" method="post">
       <div class="mb-3 form-group">
           <label for="author_name" class="form-label">Author Name</label>
-          <input type="text" name="author_name" class="form-control" required>
+          <input type="text" name="author_name" class="form-control" required value="<?php echo $author_name;?>" >
         </div>
-        <button type="submit" name="add_author" class="btn btn-primary">Add Author</button>
+        <button type="submit" name="update_author" class="btn btn-primary">Update Author</button>
       </form> 
     </div>
   <div class="col-md-4"></div>
@@ -104,13 +111,13 @@ if (!isset($_SESSION['name'])) {
 </html>
 
 <?php
-if(isset($_POST['add_author'])){
+if(isset($_POST['update_author'])){
   $connection = mysqli_connect("localhost","root","appu1234");
   $db = mysqli_select_db($connection,"lms");
-  $query = "insert into authors (author_name) values('$_POST[author_name]')";
+  $query = "update authors set author_name = '$_POST[author_name]' where author_id = $_GET[auth]";
   $query_run = mysqli_query($connection,$query);
   ?>
-  <script>alert("Author added")</script>
+  <script>location.replace("manage_author.php");</script>
   <?php
 }
 ?>

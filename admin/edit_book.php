@@ -1,9 +1,19 @@
 <?php
-require("functions.php");
 session_start();
 if (!isset($_SESSION['name'])) {
   header("Location:index.php");
   exit();
+}
+$connection = mysqli_connect("localhost","root","appu1234");
+$db = mysqli_select_db($connection,"lms");
+$query = "select * from book where book_no=$_GET[bookno]";
+$query_run = mysqli_query($connection,$query);
+while($row = mysqli_fetch_assoc($query_run)){
+  $book_no = $row["book_no"];    
+  $author_id = $row["author_id"];
+  $category_id = $row["category_id"];
+  $book_price = $row["book_price"];
+  $book_name = $row['book_name'];
 }
 ?>
 
@@ -91,26 +101,41 @@ if (!isset($_SESSION['name'])) {
   <div class="col-md-4"></div>
     <div class="col-md-4">
       <form action="" method="post">
-      <div class="mb-3 form-group">
-          <label for="author_name" class="form-label">Author Name</label>
-          <input type="text" name="author_name" class="form-control" required>
+        <div class="mb-3 form-group">
+          <label for="book_name" class="form-label">Book Name</label>
+          <input type="text" name="book_name" class="form-control" required value="<?php echo $book_name?>">
         </div>
-        <button type="submit" name="add_author" class="btn btn-primary">Add Author</button>
+        <div class="mb-3 form-group">
+          <label for="book_name" class="form-label">Author ID</label>
+          <input type="number" name="author_id" class="form-control" required value="<?php echo $author_id?>">
+        </div>
+        <div class="mb-3 form-group">
+          <label for="category_id" class="form-label">Category ID</label>
+          <input type="number" name="category_id" class="form-control" required value="<?php echo $category_id?>">
+        </div>
+        <div class="mb-3 form-group">
+          <label for="book_no" class="form-label">Book no</label>
+          <input type="number" name ="book_no" class="form-control" required value="<?php echo $book_no?>">
+        </div>
+        <div class="mb-3 form-group">
+          <label for="book_price" class="form-label">Book Price</label>
+          <input type="number" name ="book_price" class="form-control" required value="<?php echo $book_price?>">
+        </div>
+        <button type="submit" name="edit_book" class="btn btn-primary">Update book</button>
       </form> 
     </div>
   <div class="col-md-4"></div>
 </div>
 </body>
 </html>
-
-<?php
-if(isset($_POST['add_author'])){
+<?php 
+if(isset($_POST['edit_book'])){
   $connection = mysqli_connect("localhost","root","appu1234");
   $db = mysqli_select_db($connection,"lms");
-  $query = "insert into authors (author_name) values('$_POST[author_name]')";
+  $query = "update book set book_name = '$_POST[book_name]' , author_id = $_POST[author_id],category_id = $_POST[category_id] , book_no = $_POST[book_no] , book_price = $_POST[book_price] where book_no = $_GET[bookno] ";
   $query_run = mysqli_query($connection,$query);
   ?>
-  <script>alert("Author added")</script>
+  <script> location.replace("manage_book.php "); </script>
   <?php
 }
-?>
+?>  
